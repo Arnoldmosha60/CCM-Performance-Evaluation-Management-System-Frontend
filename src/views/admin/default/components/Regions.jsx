@@ -130,7 +130,7 @@ const Regions = () => {
         )}
       </div>
 
-      <table className="min-w-full bg-white border border-gray-300">
+      <table className="min-w-full bg-white border border-gray-300 elevation-5">
         <thead>
           <tr>
             <th className="py-2 px-4 border-b border-gray-300">Mkoa</th>

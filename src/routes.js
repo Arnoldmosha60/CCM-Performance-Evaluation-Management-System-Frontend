@@ -19,10 +19,12 @@ import {
   MdOutlineFlag,
   MdOutlineShowChart,
   MdOutlineGpsFixed,
+  MdOutlinePeople,
 } from "react-icons/md";
 import Signup from "views/auth/Signup";
 import Objectives from "views/admin/Objectives/Objectives";
 import Regions from "views/admin/default/components/Regions";
+import Representatives from "views/admin/Representatives/Representatives";
 
 const routes = [
   {
@@ -57,8 +59,15 @@ const routes = [
     name: "Regions Data",
     layout: "/admin",
     icon: <MdOutlineGpsFixed className="h-6 w-6" />,
-    path: '/regions',
+    path: 'regions',
     component: <Regions />,
+  },
+  {
+    name: "Regions Representatives",
+    layout: "/admin",
+    icon: <MdOutlinePeople className="h-6 w-6" />,
+    path: 'representatives',
+    component: <Representatives />,
   },
   {
     name: "NFT Marketplace",
