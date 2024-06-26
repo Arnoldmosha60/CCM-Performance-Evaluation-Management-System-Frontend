@@ -2,9 +2,7 @@ import React from "react";
 
 // Admin Imports
 import MainDashboard from "views/admin/default";
-import NFTMarketplace from "views/admin/marketplace";
 import Profile from "views/admin/profile";
-import DataTables from "views/admin/tables";
 
 // Auth Imports
 import SignIn from "views/auth/SignIn";
@@ -12,8 +10,6 @@ import SignIn from "views/auth/SignIn";
 // Icon Imports
 import {
   MdHome,
-  MdOutlineShoppingCart,
-  MdBarChart,
   MdPerson,
   MdLock,
   MdOutlineFlag,
@@ -26,6 +22,7 @@ import Objectives from "views/admin/Objectives/Objectives";
 import Regions from "views/admin/default/components/Regions";
 import Representatives from "views/admin/Representatives/Representatives";
 import ViewObjectives from "views/admin/Objectives/ViewObjectives";
+import Indicators from "views/admin/indicators/Indicators";
 
 const routes = [
   {
@@ -54,7 +51,7 @@ const routes = [
     layout: "/admin",
     icon: <MdOutlineFlag className="h-6 w-6" />,
     path: "indicators",
-    component: <Objectives />,
+    component: <Indicators />,
   },
   {
     name: "Targets",
@@ -76,21 +73,6 @@ const routes = [
     icon: <MdOutlinePeople className="h-6 w-6" />,
     path: 'representatives',
     component: <Representatives />,
-  },
-  {
-    name: "NFT Marketplace",
-    layout: "/admin",
-    path: "nft-marketplace",
-    icon: <MdOutlineShoppingCart className="h-6 w-6" />,
-    component: <NFTMarketplace />,
-    secondary: true,
-  },
-  {
-    name: "Data Tables",
-    layout: "/admin",
-    icon: <MdBarChart className="h-6 w-6" />,
-    path: "data-tables",
-    component: <DataTables />,
   },
   {
     name: "Profile",

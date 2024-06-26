@@ -52,8 +52,7 @@ const Objectives = () => {
   };
 
   const handleViewObjectives = (representative) => {
-    console.log(representative.id)
-    navigate(`/admin/view_objectives/${representative.id}/`);  // Assuming 'id' is the representative's identifier
+    navigate(`/admin/view_objectives/${representative.representative}/`);  // Assuming 'id' is the representative's identifier
   };
 
   return (
@@ -114,14 +113,6 @@ const Objectives = () => {
         setSelectedData={setSelectedData}
         objectives={[]}
       />
-
-      {/* <ViewObjectivesDialog
-        open={openViewDialog}
-        onClose={handleClose}
-        selectedData={selectedData}
-        setSelectedData={setSelectedData}
-        readOnly={true}
-      /> */}
     </>
   );
 };
