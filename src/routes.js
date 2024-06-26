@@ -25,6 +25,7 @@ import Signup from "views/auth/Signup";
 import Objectives from "views/admin/Objectives/Objectives";
 import Regions from "views/admin/default/components/Regions";
 import Representatives from "views/admin/Representatives/Representatives";
+import ViewObjectives from "views/admin/Objectives/ViewObjectives";
 
 const routes = [
   {
@@ -37,14 +38,21 @@ const routes = [
   {
     name: "Objectives",
     layout: "/admin",
-    icon: <MdOutlineFlag className="h-6 w-6" />,
+    icon: <MdOutlineShowChart className="h-6 w-6" />,
     path: "objectives",
     component: <Objectives />,
   },
   {
+    name: "View Objectives",
+    layout: "/admin",
+    icon: <MdOutlineFlag className="h-6 w-6" />,
+    path: "view_objectives/:representativeId/",
+    component: <ViewObjectives />,
+  },
+  {
     name: "Indicators",
     layout: "/admin",
-    icon: <MdOutlineShowChart className="h-6 w-6" />,
+    icon: <MdOutlineFlag className="h-6 w-6" />,
     path: "indicators",
     component: <Objectives />,
   },

@@ -5,7 +5,8 @@ import { FcGoogle } from "react-icons/fc";
 import Checkbox from "components/checkbox";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { baseURL } from 'api/baseUrl';
+import {message} from 'antd'
+import { apis } from 'api/apis';
 
 const Signup = () => {
 
@@ -23,18 +24,21 @@ const Signup = () => {
         if (registerObj.password === registerObj.re_password) {
             try {
                 const { re_password, ...postObj } = registerObj;  // Destructure to exclude re_password
-               
-                const response = await axios.post(`${baseURL}api/auth/register`, postObj);
+
+                const response = await axios.post(apis.registerUrl, postObj);
 
                 if (response.data.success) {
                     console.log("Registration successful!");
                     navigate('/auth/sign-in');
+                    message.success('Registration successful')
                 } else {
                     setErrorMessage(response.data.message || "Registration failed. Please try again.");
+                    message.error('Registration Failed')
                 }
             } catch (error) {
                 setErrorMessage(error.response.data.message || "An error occurred. Please try again.");
                 console.log(error);
+                message.error('An Error Occured')
             }
         } else {
             setErrorMessage("Passwords didn't match!");
@@ -150,7 +154,9 @@ const Signup = () => {
                     {errorMessage && <div className="text-red-500 text-sm">{errorMessage}</div>}
                     <button
                         type='submit'
-                        className="linear mt-2 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200">
+                        className="linear mt-2 w-full rounded-xl  py-[12px] text-base font-medium text-white transition duration-200 dark:text-white"
+                        style={{ background: 'linear-gradient(to bottom, yellow, green)' }}
+                    >
                         Sign Up
                     </button>
                 </form>

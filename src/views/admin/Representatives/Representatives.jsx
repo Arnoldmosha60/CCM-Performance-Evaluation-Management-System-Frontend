@@ -1,7 +1,9 @@
+
 import { baseURL } from 'api/baseUrl';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { MdEdit, MdSearch } from 'react-icons/md';
+import {message} from 'antd'
 
 const Representatives = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -55,14 +57,19 @@ const Representatives = () => {
                 ...repData,
                 wilaya: editingWilaya.wilaya,
                 mkoa: editingWilaya.mkoa
+            }, {
+                headers: {
+                    'Authorization': `Token ${localStorage.getItem('refresh_token')}`
+                }
             });
             if (response.data.success) {
                 const updatedRepresentative = response.data.representative;
-                
+                const rep = response.data.user;
+                message.success('Success')
                 // Find the corresponding item in the data array and update its name
                 const updatedData = data.map(item => {
                     if (item.wilaya === updatedRepresentative.wilaya) {
-                        return { ...item, name: updatedRepresentative.name };
+                        return { ...item, name: rep.fullname };
                     }
                     return item;
                 });

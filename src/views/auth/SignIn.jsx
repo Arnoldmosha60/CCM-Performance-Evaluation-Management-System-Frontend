@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { baseURL } from "api/baseUrl";
+import {message} from 'antd';
+import { apis } from "api/apis";
 
 export default function SignIn() {
   const INITIAL_OBJ = {
@@ -20,20 +22,23 @@ export default function SignIn() {
   const submitForm = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${baseURL}api/auth/login`, loginObj);
+      const response = await axios.post(apis.loginUrl, loginObj);
       if (response.data.success) {
-        const {user, token} = response.data;
+        const { user, token } = response.data;
         console.log("Login successful!");
         localStorage.setItem('refresh_token', token);
         localStorage.setItem('user', JSON.stringify(user));
+        message.success('Login Success')
         navigate('/admin');
       } else {
         setErrorMessage(response.data.message || "Login failed. Please try again.");
         console.log("Login failed")
+        message.error('Login Failed')
       }
     } catch (error) {
       setErrorMessage(error.response.data.message || "An error occurred. Please try again.");
       console.log(error);
+      message.error('An error occured')
     }
   };
 
@@ -107,7 +112,11 @@ export default function SignIn() {
             </a>
           </div>
           {errorMessage && <div className="text-red-500 text-sm">{errorMessage}</div>}
-          <button type="submit" className="linear mt-2 w-full rounded-xl bg-brand-500 py-[12px] text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200">
+          <button
+            type="submit"
+            className="linear mt-2 w-full rounded-xl  py-[12px] text-base font-medium text-white transition duration-200 dark:text-white"
+            style={{ background: 'linear-gradient(to bottom, yellow, green)' }}
+          >
             Sign In
           </button>
         </form>
