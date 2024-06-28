@@ -14,6 +14,7 @@ import ObjectivesDialog from 'components/dialog/ObjectivesDialog';
 import axios from 'axios';
 import { apis } from 'api/apis';
 import {useNavigate} from 'react-router-dom'
+import { format } from 'date-fns';
 
 const Objectives = () => {
   const token = localStorage.getItem('refresh_token');
@@ -68,6 +69,7 @@ const Objectives = () => {
               <TableCell>District</TableCell>
               <TableCell>District Code</TableCell>
               <TableCell>Region</TableCell>
+              <TableCell>Created On</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -81,6 +83,7 @@ const Objectives = () => {
                 <TableCell>{representative.wilaya}</TableCell>
                 <TableCell>#{representative.wilaya_code}</TableCell>
                 <TableCell>{representative.mkoa}</TableCell>
+                <TableCell>{format(new Date(representative.date), 'dd MMM yyyy')}</TableCell>
                 <TableCell>
                   <Button
                     variant="contained"

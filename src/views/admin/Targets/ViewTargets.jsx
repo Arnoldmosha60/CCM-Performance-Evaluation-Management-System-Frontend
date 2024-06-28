@@ -44,37 +44,37 @@ const ViewTargets = () => {
         Targets for Objective
       </Typography>
       {loading ? (
-                <CircularProgress style={{ display: 'block', margin: '2rem auto' }} />
-            ) : (
-                <Card>
-                    <CardHeader
-                        title="List of Targets"
-                        subheader={`Objective ID: ${objectiveId}`}
-                        style={{ textAlign: 'center', backgroundColor: '#f5f5f5' }}
-                    />
-                    <CardContent>
-                        <List>
-                            {targets.length > 0 ? (
-                                targets.map((target, index) => (
-                                    <React.Fragment key={index}>
-                                        <ListItem>
-                                            <ListItemText
-                                                primary={target.target}
-                                                secondary={`Target Code: ${target.target_code}\nCreated At: ${formatDate(target.created_on)}`}
-                                            />
-                                        </ListItem>
-                                        {index < targets.length - 1 && <Divider />}
-                                    </React.Fragment>
-                                ))
-                            ) : (
-                                <Typography variant="body1" align="center">
-                                    No Targets found.
-                                </Typography>
-                            )}
-                        </List>
-                    </CardContent>
-                </Card>
-            )}
+        <CircularProgress style={{ display: 'block', margin: '2rem auto' }} />
+      ) : (
+        <Card>
+          <CardHeader
+            title="List of Targets"
+            subheader={`Objective ID: ${objectiveId}`}
+            style={{ textAlign: 'center', backgroundColor: '#f5f5f5' }}
+          />
+          <CardContent>
+            <List>
+              {targets.length > 0 ? (
+                targets.map((target, index) => (
+                  <React.Fragment key={index}>
+                    <ListItem>
+                      <ListItemText
+                        primary={target.target}
+                        secondary={`Target Code: ${target.target_code}\nCreated At: ${formatDate(target.created_on)}`}
+                      />
+                    </ListItem>
+                    {index < targets.length - 1 && <Divider />}
+                  </React.Fragment>
+                ))
+              ) : (
+                <Typography variant="body1" align="center">
+                  No Targets found.
+                </Typography>
+              )}
+            </List>
+          </CardContent>
+        </Card>
+      )}
     </Container>
   )
 }

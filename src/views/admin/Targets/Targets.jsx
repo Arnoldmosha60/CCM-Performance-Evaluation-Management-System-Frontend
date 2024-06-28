@@ -14,6 +14,7 @@ import axios from 'axios';
 import { apis } from 'api/apis';
 import TargetsDialog from 'components/dialog/TargetsDialog';
 import { useNavigate } from 'react-router-dom';
+import { format } from 'date-fns';
 
 const Targets = () => {
     const token = localStorage.getItem('refresh_token');
@@ -65,6 +66,7 @@ const Targets = () => {
                             <TableCell>Representative</TableCell>
                             <TableCell>District Code</TableCell>
                             <TableCell>Objective Code</TableCell>
+                            <TableCell>Created On</TableCell>
                             <TableCell>Action</TableCell>
                         </TableRow>
                     </TableHead>
@@ -75,6 +77,7 @@ const Targets = () => {
                                 <TableCell>{objective.representative.representative}</TableCell>
                                 <TableCell>#{objective.representative.wilaya_code}</TableCell>
                                 <TableCell>#{objective.objective_code}</TableCell>
+                                <TableCell>{format(new Date(objective.created_at), 'dd MMM yyyy')}</TableCell>
                                 <TableCell>
                                     <Button
                                         variant="contained"
