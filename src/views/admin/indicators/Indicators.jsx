@@ -72,7 +72,7 @@ const Indicators = () => {
                             <TableRow key={target.id}>
                                 <TableCell>{index + 1}</TableCell>
                                 <TableCell>{target.target_code}</TableCell>
-                                <TableCell>{target.created_by}</TableCell>
+                                <TableCell>{target.created_by.fullname}</TableCell>
                                 <TableCell>{format(new Date(target.created_on), 'dd MMM yyyy')}</TableCell>
                                 <TableCell>
                                     <Button
