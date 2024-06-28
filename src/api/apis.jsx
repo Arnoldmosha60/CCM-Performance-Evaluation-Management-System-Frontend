@@ -11,4 +11,6 @@ export const apis = {
     getObjectiveTargetsUrl: baseURL + 'api/ccm/objective-targets',
     saveIndicatorsUrl: baseURL + 'api/ccm/save-indicators/',
     getTargetIndicatorsUrl: baseURL + 'api/ccm/target-indicators',
+    saveActivitiesUrl: baseURL + 'api/ccm/save-activities/',
+    getIndicatorActivitiesUrl: baseURL + 'api/ccm/indicator-activities',
 }

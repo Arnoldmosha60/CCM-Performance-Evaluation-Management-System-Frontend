@@ -12,11 +12,11 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { apis } from 'api/apis';
-import IndicatorsDialog from 'components/dialog/IndicatorsDialog';
+import ActivitiesDialog from 'components/dialog/ActivitiesDialog';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 
-const Indicators = () => {
+const Activities = () => {
     const token = localStorage.getItem('refresh_token');
     const [data, setData] = useState([]);
     const [openAddDialog, setOpenAddDialog] = useState(false);
@@ -26,9 +26,9 @@ const Indicators = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(apis.saveTargetsUrl, {
+            const response = await axios.get(apis.saveActivitiesUrl, {
                 headers: {
-                    Authorization: `Token ${token}`
+                    'Authorization': `Token ${token}`
                 }
             });
             if (response.data.success) {
@@ -45,13 +45,13 @@ const Indicators = () => {
         setOpenViewDialog(false);
     };
 
-    const handleAddIndicators = (target) => {
-        setSelectedData(target);
+    const handleAddActivities = (indicator) => {
+        setSelectedData(indicator);
         setOpenAddDialog(true);
     }
 
-    const handleViewIndicators = (target) => {
-        navigate(`/admin/view_indicators/${target.id}/`);
+    const handleViewActivities = (indicator) => {
+        navigate(`/admin/view_activities/${indicator.id}/`);
     }
 
     return (
@@ -61,25 +61,25 @@ const Indicators = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell>S/N</TableCell>
-                            <TableCell>Target Code</TableCell>
+                            <TableCell>Indicator Code</TableCell>
                             <TableCell>Created By</TableCell>
                             <TableCell>Created On</TableCell>
                             <TableCell>Actions</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((target, index) => (
-                            <TableRow key={target.id}>
+                        {data.map((indicator, index) => (
+                            <TableRow key={indicator.id}>
                                 <TableCell>{index + 1}</TableCell>
-                                <TableCell>#{target.target_code}</TableCell>
-                                <TableCell>{target.created_by.fullname}</TableCell>
-                                <TableCell>{format(new Date(target.created_on), 'dd MMM yyyy')}</TableCell>
+                                <TableCell>#{indicator.indicator_code}</TableCell>
+                                <TableCell>{indicator.created_by.fullname}</TableCell>
+                                <TableCell>{format(new Date(indicator.created_on), 'dd MMM yyyy')}</TableCell>
                                 <TableCell>
                                     <Button
                                         variant="contained"
                                         size="small"
                                         color="primary"
-                                        onClick={() => handleAddIndicators(target)}
+                                        onClick={() => handleAddActivities(indicator)}
                                     >
                                         Add
                                     </Button>
@@ -87,7 +87,7 @@ const Indicators = () => {
                                         variant="contained"
                                         color="secondary"
                                         size="small"
-                                        onClick={() => handleViewIndicators(target)}
+                                        onClick={() => handleViewActivities(indicator)}
                                         style={{ marginLeft: '10px' }}
                                     >
                                         View
@@ -99,15 +99,15 @@ const Indicators = () => {
                 </Table>
             </TableContainer>
 
-            <IndicatorsDialog
+            <ActivitiesDialog
                 open={openAddDialog}
                 onClose={handleClose}
                 selectedData={selectedData}
                 setSelectedData={setSelectedData}
-                indicators={[]}
+                activities={[]}
             />
         </>
     )
 }
 
-export default Indicators
+export default Activities

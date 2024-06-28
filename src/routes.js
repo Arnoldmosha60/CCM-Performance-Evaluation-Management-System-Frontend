@@ -16,6 +16,7 @@ import {
   MdOutlineShowChart,
   MdOutlineGpsFixed,
   MdOutlinePeople,
+  MdOutlineAssignment,
 } from "react-icons/md";
 import Signup from "views/auth/Signup";
 import Objectives from "views/admin/Objectives/Objectives";
@@ -26,6 +27,7 @@ import Targets from "views/admin/Targets/Targets";
 import ViewTargets from "views/admin/Targets/ViewTargets";
 import ViewIndicators from "views/admin/Indicators/ViewIndicators";
 import Indicators from "views/admin/Indicators/Indicators";
+import Activities from "views/admin/activities/Activities";
 
 const routes = [
   {
@@ -83,6 +85,20 @@ const routes = [
     icon: <MdOutlineFlag className="h-6 w-6" />,
     path: "view_indicators/:targetId/",
     component: <ViewIndicators />,
+  },
+  {
+    name: "Activities",
+    layout: "/admin",
+    icon: <MdOutlineAssignment className="h-6 w-6" />,
+    path: "activities",
+    component: <Activities />,
+  },
+  {
+    name: "View Activities",
+    layout: "/admin",
+    icon: <MdOutlineAssignment className="h-6 w-6" />,
+    path: "view_activities/:indicatorId/",
+    component: <Activities />,
   },
   {
     name: "Regions Data",
