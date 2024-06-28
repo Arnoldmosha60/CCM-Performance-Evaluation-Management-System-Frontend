@@ -12,11 +12,10 @@ import {
 } from '@mui/material';
 import axios from 'axios';
 import { apis } from 'api/apis';
-import IndicatorsDialog from 'components/dialog/IndicatorsDialog';
+import TargetsDialog from 'components/dialog/TargetsDialog';
 import { useNavigate } from 'react-router-dom';
-import { format } from 'date-fns';
 
-const Indicators = () => {
+const Targets = () => {
     const token = localStorage.getItem('refresh_token');
     const [data, setData] = useState([]);
     const [openAddDialog, setOpenAddDialog] = useState(false);
@@ -24,34 +23,35 @@ const Indicators = () => {
     const [selectedData, setSelectedData] = useState({});
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(apis.saveTargetsUrl, {
-                headers: {
-                    Authorization: `Token ${token}`
-                }
-            });
-            if (response.data.success) {
-                setData(response.data.data);
-            } else {
-                console.log('Error fetching targets');
-            }
-        };
-        fetchData();
-    }, [token]);
-
     const handleClose = () => {
         setOpenAddDialog(false);
         setOpenViewDialog(false);
     };
 
-    const handleAddIndicators = (target) => {
-        setSelectedData(target);
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get(apis.saveObjectivesUrl, {
+                headers: {
+                    'Authorization': `Token ${token}`
+                },
+            });
+
+            if (response.data.success) {
+                setData(response.data.data);
+            } else {
+                console.log('Error fetching objectives');
+            }
+        };
+        fetchData();
+    }, [token]);
+
+    const handleAddTargets = (objective) => {
+        setSelectedData(objective);
         setOpenAddDialog(true);
     }
 
-    const handleViewIndicators = (target) => {
-        navigate(`/admin/view_indicators/${target.id}/`);
+    const handleViewTargets = (objective) => {
+        navigate(`/admin/view_targets/${objective.id}/`);
     }
 
     return (
@@ -61,25 +61,25 @@ const Indicators = () => {
                     <TableHead>
                         <TableRow>
                             <TableCell>S/N</TableCell>
-                            <TableCell>Target Code</TableCell>
-                            <TableCell>Created By</TableCell>
-                            <TableCell>Created On</TableCell>
-                            <TableCell>Actions</TableCell>
+                            <TableCell>Representative</TableCell>
+                            <TableCell>District Code</TableCell>
+                            <TableCell>Objective Code</TableCell>
+                            <TableCell>Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((target, index) => (
-                            <TableRow key={target.id}>
+                        {data.map((objective, index) => (
+                            <TableRow key={objective.id}>
                                 <TableCell>{index + 1}</TableCell>
-                                <TableCell>{target.target_code}</TableCell>
-                                <TableCell>{target.created_by}</TableCell>
-                                <TableCell>{format(new Date(target.created_on), 'dd MMM yyyy')}</TableCell>
+                                <TableCell></TableCell>
+                                <TableCell>#</TableCell>
+                                <TableCell>#{objective.objective_code}</TableCell>
                                 <TableCell>
                                     <Button
                                         variant="contained"
                                         size="small"
                                         color="primary"
-                                        onClick={() => handleAddIndicators(target)}
+                                        onClick={() => handleAddTargets(objective)}
                                     >
                                         Add
                                     </Button>
@@ -87,7 +87,7 @@ const Indicators = () => {
                                         variant="contained"
                                         color="secondary"
                                         size="small"
-                                        onClick={() => handleViewIndicators(target)}
+                                        onClick={() => handleViewTargets(objective)}
                                         style={{ marginLeft: '10px' }}
                                     >
                                         View
@@ -99,15 +99,15 @@ const Indicators = () => {
                 </Table>
             </TableContainer>
 
-            <IndicatorsDialog
+            <TargetsDialog
                 open={openAddDialog}
                 onClose={handleClose}
                 selectedData={selectedData}
                 setSelectedData={setSelectedData}
-                indicators={[]}
+                targets={[]}
             />
         </>
     )
 }
 
-export default Indicators
+export default Targets

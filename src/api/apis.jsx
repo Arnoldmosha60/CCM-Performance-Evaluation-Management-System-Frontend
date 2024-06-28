@@ -7,4 +7,6 @@ export const apis = {
     saveObjectivesUrl: baseURL + 'api/ccm/save-objectives/',
     getUserInformationUrl: baseURL + 'api/auth/user-information',
     getUserObjectivesUrl: baseURL + 'api/ccm/user-objectives',
+    saveTargetsUrl: baseURL + 'api/ccm/save-targets/',
+    getObjectiveTargetsUrl: baseURL + 'api/ccm/objective-targets',
 }

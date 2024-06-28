@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import {
     Dialog,
@@ -12,53 +13,53 @@ import {
 import { MdAdd } from 'react-icons/md';
 import axios from 'axios';
 import { apis } from 'api/apis';
-import {message} from 'antd'
+import { message } from 'antd';
 
-const ObjectivesDialog = ({ open, onClose, selectedData, setSelectedData }) => {
-
+const TargetsDialog = ({ open, onClose, selectedData, setSelectedData }) => {
     useEffect(() => {
-        if (open && !selectedData.objectives) {
-            setSelectedData({ ...selectedData, objectives: [''] });
+        if (open && !selectedData.targets) {
+            setSelectedData({ ...selectedData, targets: [''] });
         }
     }, [open, selectedData, setSelectedData]);
 
-    const handleAddObjective = () => {
+    const handleAddTarget = () => {
         setSelectedData({
             ...selectedData,
-            objectives: [...(selectedData.objectives || []), '']
+            targets: [...(selectedData.targets || []), '']
         });
     };
 
-    const handleObjectiveChange = (index, value) => {
-        const newObjectives = [...(selectedData.objectives || [])];
-        newObjectives[index] = value;
+    const handleTargetChange = (index, value) => {
+        const newTargets = [...(selectedData.targets || [])];
+        newTargets[index] = value;
         setSelectedData({
             ...selectedData,
-            objectives: newObjectives
+            targets: newTargets
         });
     };
 
     const handleSubmit = async () => {
         try {
             const data = {
-                representative_id: selectedData.id,
-                objectives: selectedData.objectives
+                objective_id: selectedData.id,
+                targets: selectedData.targets
             }
-            const response = await axios.post(apis.saveObjectivesUrl, data,{
+            const response = await axios.post(apis.saveTargetsUrl, data, {
                 headers: {
+                    'Content-Type': 'application/json',
                     'Authorization': `Token ${localStorage.getItem('refresh_token')}`
                 }
             });
             if (response.data.success) {
                 console.log('Success', response.data)
-                message.success('Objectives saved Successfully')
+                message.success('Targets saved Successfully')
                 onClose(true);
             } else {
                 console.log('Error')
-                message.error('Failed to save Objectives')
+                message.error('Failed to save Targets')
             }
         } catch (error) {
-            console.error('Error saving objectives:', error);
+            console.error('Error saving Targets:', error);
             message.error('An error occured')
         } finally {
             console.log(false);
@@ -66,51 +67,51 @@ const ObjectivesDialog = ({ open, onClose, selectedData, setSelectedData }) => {
     }
 
     return (
-        <Dialog open={open} onClose={onClose}>
-            <DialogTitle>Details</DialogTitle>
+        <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
+            <DialogTitle>Targets</DialogTitle>
             <DialogContent>
                 <DialogContentText style={{ color: 'black' }}>
-                    Objectives Form
+                    Please enter the Targets for Objective #{selectedData.objective_code || ''}.
                 </DialogContentText>
 
                 <TextField
                     margin="dense"
-                    label="Representative"
+                    label="Objective Code"
                     type="text"
                     fullWidth
                     variant="standard"
-                    value={selectedData.fullname || ''}
+                    value={selectedData.objective_code || ''}
                     disabled
                     InputProps={{ style: { color: 'black' } }}
                 />
 
                 <TextField
                     margin="dense"
-                    label="Wilaya"
+                    label="Objective"
                     type="text"
                     fullWidth
                     variant="standard"
-                    value={selectedData.wilaya || ''}
+                    value={selectedData.objective || ''}
                     disabled
                     InputProps={{ style: { color: 'black' } }}
                 />
 
-                {(selectedData.objectives || []).map((objective, index) => (
+                {(selectedData.targets || []).map((target, index) => (
                     <TextField
                         key={index}
                         margin="dense"
-                        label={`Objective ${index + 1}`}
+                        label={`Target ${index + 1}`}
                         type="text"
                         fullWidth
                         variant="standard"
-                        value={objective}
-                        onChange={(e) => handleObjectiveChange(index, e.target.value)}
+                        value={target}
+                        onChange={(e) => handleTargetChange(index, e.target.value)}
                         InputProps={{ style: { color: 'black' } }}
                     />
                 ))}
 
                 <div className="flex justify-end mt-2">
-                    <IconButton onClick={handleAddObjective} color="primary">
+                    <IconButton onClick={handleAddTarget} color="primary">
                         <MdAdd />
                     </IconButton>
                 </div>
@@ -125,6 +126,6 @@ const ObjectivesDialog = ({ open, onClose, selectedData, setSelectedData }) => {
             </DialogActions>
         </Dialog>
     );
-};
+}
 
-export default ObjectivesDialog;
+export default TargetsDialog;

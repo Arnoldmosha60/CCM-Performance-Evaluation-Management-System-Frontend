@@ -22,7 +22,10 @@ import Objectives from "views/admin/Objectives/Objectives";
 import Regions from "views/admin/default/components/Regions";
 import Representatives from "views/admin/Representatives/Representatives";
 import ViewObjectives from "views/admin/Objectives/ViewObjectives";
-import Indicators from "views/admin/indicators/Indicators";
+import Targets from "views/admin/Targets/Targets";
+import ViewTargets from "views/admin/Targets/ViewTargets";
+import ViewIndicators from "views/admin/Indicators/ViewIndicators";
+import Indicators from "views/admin/Indicators/Indicators";
 
 const routes = [
   {
@@ -31,6 +34,13 @@ const routes = [
     path: "default",
     icon: <MdHome className="h-6 w-6" />,
     component: <MainDashboard />,
+  },
+  {
+    name: "Regions Representatives",
+    layout: "/admin",
+    icon: <MdOutlinePeople className="h-6 w-6" />,
+    path: 'representatives',
+    component: <Representatives />,
   },
   {
     name: "Objectives",
@@ -47,6 +57,20 @@ const routes = [
     component: <ViewObjectives />,
   },
   {
+    name: "Targets",
+    layout: "/admin",
+    icon: <MdOutlineGpsFixed className="h-6 w-6" />,
+    path: "targets",
+    component: <Targets />,
+  },
+  {
+    name: "View Targets",
+    layout: "/admin",
+    icon: <MdOutlineGpsFixed className="h-6 w-6" />,
+    path: "view_targets/:objectiveId/",
+    component: <ViewTargets />
+  },
+  {
     name: "Indicators",
     layout: "/admin",
     icon: <MdOutlineFlag className="h-6 w-6" />,
@@ -54,11 +78,11 @@ const routes = [
     component: <Indicators />,
   },
   {
-    name: "Targets",
+    name: "View Indicators",
     layout: "/admin",
-    icon: <MdOutlineGpsFixed className="h-6 w-6" />,
-    path: "targets",
-    component: <Objectives />,
+    icon: <MdOutlineFlag className="h-6 w-6" />,
+    path: "view_indicators/:targetId/",
+    component: <ViewIndicators />,
   },
   {
     name: "Regions Data",
@@ -67,13 +91,7 @@ const routes = [
     path: 'regions',
     component: <Regions />,
   },
-  {
-    name: "Regions Representatives",
-    layout: "/admin",
-    icon: <MdOutlinePeople className="h-6 w-6" />,
-    path: 'representatives',
-    component: <Representatives />,
-  },
+  
   {
     name: "Profile",
     layout: "/admin",

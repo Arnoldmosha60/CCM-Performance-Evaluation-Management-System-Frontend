@@ -5,8 +5,16 @@ import { FcGoogle } from "react-icons/fc";
 import Checkbox from "components/checkbox";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import {message} from 'antd'
+import { message } from 'antd';
 import { apis } from 'api/apis';
+import { css } from "@emotion/react";
+import { ClipLoader } from "react-spinners";
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 const Signup = () => {
 
@@ -16,10 +24,12 @@ const Signup = () => {
 
     const [registerObj, setRegisterObj] = useState(INITIAL_OBJ);
     const [errorMessage, setErrorMessage] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const submitForm = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         if (registerObj.password === registerObj.re_password) {
             try {
@@ -30,19 +40,20 @@ const Signup = () => {
                 if (response.data.success) {
                     console.log("Registration successful!");
                     navigate('/auth/sign-in');
-                    message.success('Registration successful')
+                    message.success('Registration successful');
                 } else {
                     setErrorMessage(response.data.message || "Registration failed. Please try again.");
-                    message.error('Registration Failed')
+                    message.error('Registration Failed');
                 }
             } catch (error) {
                 setErrorMessage(error.response.data.message || "An error occurred. Please try again.");
                 console.log(error);
-                message.error('An Error Occured')
+                message.error('An Error Occurred');
             }
         } else {
             setErrorMessage("Passwords didn't match!");
         }
+        setIsLoading(false);
     };
 
     const updateFormValue = ({ updateType, value }) => {
@@ -51,7 +62,12 @@ const Signup = () => {
     };
 
     return (
-        <div className="mt-2 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start">
+        <div className={`mt-2 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start ${isLoading ? 'opacity-50' : ''}`}>
+            {isLoading && (
+                <div className="fixed inset-0 flex items-center justify-center bg-gray-700 bg-opacity-50 z-50">
+                    <ClipLoader css={override} size={150} color={"#123abc"} loading={isLoading} />
+                </div>
+            )}
             {/* Sign in section */}
             <div className="mt-[10vh] w-full max-w-full flex-col items-center md:pl-4 lg:pl-0 xl:max-w-[420px]">
                 <h4 className="mb-2.5 text-4xl font-bold text-navy-700 dark:text-white">
@@ -154,7 +170,7 @@ const Signup = () => {
                     {errorMessage && <div className="text-red-500 text-sm">{errorMessage}</div>}
                     <button
                         type='submit'
-                        className="linear mt-2 w-full rounded-xl  py-[12px] text-base font-medium text-white transition duration-200 dark:text-white"
+                        className="linear mt-2 w-full rounded-xl py-[12px] text-base font-medium text-white transition duration-200 dark:text-white"
                         style={{ background: 'linear-gradient(to bottom, yellow, green)' }}
                     >
                         Sign Up

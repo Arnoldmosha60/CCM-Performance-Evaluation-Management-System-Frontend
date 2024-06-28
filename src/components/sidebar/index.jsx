@@ -7,7 +7,11 @@ import logo from 'assets/img/auth/ccm_Logo.png';
 
 const Sidebar = ({ open, onClose }) => {
   // Filter out the "View Objectives" route
-  const filteredRoutes = routes.filter(route => route.path !== "view_objectives/:representativeId/");
+  const filteredRoutes = routes.filter(route => (
+    route.path !== "view_objectives/:representativeId/" &&
+    route.path !== "view_targets/:objectiveId/" &&
+    route.path !== "view_indicators/:targetId/"
+  ));
 
   return (
     <div
