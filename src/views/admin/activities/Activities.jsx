@@ -26,13 +26,14 @@ const Activities = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(apis.saveActivitiesUrl, {
+            const response = await axios.get(apis.saveIndicatorsUrl, {
                 headers: {
                     'Authorization': `Token ${token}`
                 }
             });
             if (response.data.success) {
                 setData(response.data.data);
+                console.log(response.data.data)
             } else {
                 console.log('Error fetching targets');
             }

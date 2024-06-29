@@ -4,12 +4,16 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { apis } from 'api/apis';
 import { format } from 'date-fns';
-import { Container, Typography, Card, CardContent, CardHeader, List, ListItem, ListItemText, Divider, CircularProgress } from '@mui/material';
+import { message } from 'antd';
+import { Container, Typography, Card, CardContent, CardHeader, List, ListItem, ListItemText, Divider, CircularProgress, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button } from '@mui/material';
 
 const ViewActivities = () => {
   const { indicatorId } = useParams();
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedActivity, setSelectedActivity] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [achievement, setAchievement] = useState('');
 
   useEffect(() => {
     const fetchActivities = async () => {
@@ -33,12 +37,12 @@ const ViewActivities = () => {
     fetchActivities();
   }, [indicatorId]);
 
-const formatDate = (dateString) => {
-  return format(new Date(dateString), 'dd MMM yyyy');
-};
+  const formatDate = (dateString) => {
+    return format(new Date(dateString), 'dd MMM yyyy');
+  };
 
-return (
-  <Container maxWidth="md" style={{ marginTop: '2rem' }}>
+  return (
+    <Container maxWidth="md" style={{ marginTop: '2rem' }}>
       <Typography variant="h4" component="h1" gutterBottom align="center" color="primary">
         Activities for Indicator
       </Typography>
@@ -76,7 +80,7 @@ return (
         </Card>
       )}
     </Container>
-)
+  )
 }
 
 export default ViewActivities

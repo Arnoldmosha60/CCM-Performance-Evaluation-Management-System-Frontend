@@ -2,7 +2,6 @@ import React from "react";
 
 // Admin Imports
 import MainDashboard from "views/admin/default";
-import Profile from "views/admin/profile";
 
 // Auth Imports
 import SignIn from "views/auth/SignIn";
@@ -10,13 +9,13 @@ import SignIn from "views/auth/SignIn";
 // Icon Imports
 import {
   MdHome,
-  MdPerson,
   MdLock,
   MdOutlineFlag,
   MdOutlineShowChart,
   MdOutlineGpsFixed,
   MdOutlinePeople,
   MdOutlineAssignment,
+  MdOutlineEmojiEvents,
 } from "react-icons/md";
 import Signup from "views/auth/Signup";
 import Objectives from "views/admin/Objectives/Objectives";
@@ -28,6 +27,8 @@ import ViewTargets from "views/admin/Targets/ViewTargets";
 import ViewIndicators from "views/admin/Indicators/ViewIndicators";
 import Indicators from "views/admin/Indicators/Indicators";
 import Activities from "views/admin/activities/Activities";
+import ViewActivities from "views/admin/activities/ViewActivities";
+import Achievements from "views/Achievements/Achievements";
 
 const routes = [
   {
@@ -98,7 +99,14 @@ const routes = [
     layout: "/admin",
     icon: <MdOutlineAssignment className="h-6 w-6" />,
     path: "view_activities/:indicatorId/",
-    component: <Activities />,
+    component: <ViewActivities />,
+  },
+  {
+    name: "Achievements",
+    layout: "/admin",
+    icon: <MdOutlineEmojiEvents className="h-6 w-6" />,
+    path: "achievements",
+    component: <Achievements />,
   },
   {
     name: "Regions Data",
@@ -106,14 +114,6 @@ const routes = [
     icon: <MdOutlineGpsFixed className="h-6 w-6" />,
     path: 'regions',
     component: <Regions />,
-  },
-  
-  {
-    name: "Profile",
-    layout: "/admin",
-    path: "profile",
-    icon: <MdPerson className="h-6 w-6" />,
-    component: <Profile />,
   },
   {
     name: "Sign In",

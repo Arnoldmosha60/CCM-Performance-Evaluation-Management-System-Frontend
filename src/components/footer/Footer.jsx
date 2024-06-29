@@ -7,46 +7,6 @@ const Footer = () => {
           ©{1900 + new Date().getYear()}. All Rights Reserved.
         </p>
       </h5>
-      <div>
-        <ul className="flex flex-wrap items-center gap-3 sm:flex-nowrap md:gap-10">
-          <li>
-            <a
-              target="blank"
-              href="mailto:arnoldmosha60@gmail.com"
-              className="text-base font-medium text-gray-600 hover:text-gray-600"
-            >
-              Support
-            </a>
-          </li>
-          <li>
-            <a
-              target="blank"
-              href="#"
-              className="text-base font-medium text-gray-600 hover:text-gray-600"
-            >
-              License
-            </a>
-          </li>
-          <li>
-            <a
-              target="blank"
-              href="#"
-              className="text-base font-medium text-gray-600 hover:text-gray-600"
-            >
-              Terms of Use
-            </a>
-          </li>
-          <li>
-            <a
-              target="blank"
-              href="#"
-              className="text-base font-medium text-gray-600 hover:text-gray-600"
-            >
-              Blog
-            </a>
-          </li>
-        </ul>
-      </div>
     </div>
   );
 };

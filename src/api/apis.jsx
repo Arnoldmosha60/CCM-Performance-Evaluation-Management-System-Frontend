@@ -13,4 +13,5 @@ export const apis = {
     getTargetIndicatorsUrl: baseURL + 'api/ccm/target-indicators',
     saveActivitiesUrl: baseURL + 'api/ccm/save-activities/',
     getIndicatorActivitiesUrl: baseURL + 'api/ccm/indicator-activities',
+    addAchievementUrl: baseURL + 'api/ccm/activity-achievement/',
 }
