@@ -54,7 +54,6 @@ const Achievements = () => {
                                 <TableCell>{indicator.created_by.fullname}</TableCell>
                                 <TableCell>{format(new Date(indicator.created_on), 'dd MMM yyyy')}</TableCell>
                                 <TableCell>{indicator.achievement_percentage}%</TableCell>
-                                
                             </TableRow>
                         ))}
                     </TableBody>

@@ -17,8 +17,12 @@ import { message } from 'antd';
 
 const IndicatorsDialog = ({ open, onClose, selectedData, setSelectedData }) => {
     useEffect(() => {
-        if (open && !selectedData.indicators) {
-            setSelectedData({ ...selectedData, indicators: [''] });
+        if (open && (!selectedData.indicators || !selectedData.indicatorValues)) {
+            setSelectedData({
+                ...selectedData,
+                indicators: selectedData.indicators || [''],
+                indicatorValues: selectedData.indicatorValues || ['']
+            });
         }
     }, [open, selectedData, setSelectedData]);
 
@@ -27,7 +31,8 @@ const IndicatorsDialog = ({ open, onClose, selectedData, setSelectedData }) => {
             const data = {
                 target_id: selectedData.id,
                 indicators: selectedData.indicators,
-            }
+                indicatorValues: selectedData.indicatorValues,
+            };
             const response = await axios.post(apis.saveIndicatorsUrl, data, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,25 +40,24 @@ const IndicatorsDialog = ({ open, onClose, selectedData, setSelectedData }) => {
                 }
             });
             if (response.data.success) {
-                console.log('Success', response.data)
-                message.success('Indicators saved Successfully')
+                console.log('Success', response.data);
+                message.success('Indicators saved successfully');
                 onClose(true);
             } else {
-                console.log('Error')
-                message.error('Failed to save Indicators')
+                console.log('Error');
+                message.error('Failed to save Indicators');
             }
         } catch (error) {
             console.error('Error saving Indicators:', error);
-            message.error('An error occured')
-        } finally {
-            console.log(false);
+            message.error('An error occurred');
         }
-    }
+    };
 
     const handleAddIndicator = () => {
         setSelectedData({
             ...selectedData,
-            indicators: [...(selectedData.indicators || []), '']
+            indicators: [...(selectedData.indicators || []), ''],
+            indicatorValues: [...(selectedData.indicatorValues || []), '']
         });
     };
 
@@ -63,6 +67,15 @@ const IndicatorsDialog = ({ open, onClose, selectedData, setSelectedData }) => {
         setSelectedData({
             ...selectedData,
             indicators: newIndicators
+        });
+    };
+
+    const handleIndicatorValueChange = (index, value) => {
+        const newIndicatorValues = [...(selectedData.indicatorValues || [])];
+        newIndicatorValues[index] = value;
+        setSelectedData({
+            ...selectedData,
+            indicatorValues: newIndicatorValues
         });
     };
 
@@ -97,17 +110,28 @@ const IndicatorsDialog = ({ open, onClose, selectedData, setSelectedData }) => {
                 />
 
                 {(selectedData.indicators || []).map((indicator, index) => (
-                    <TextField
-                        key={index}
-                        margin="dense"
-                        label={`Indicator ${index + 1}`}
-                        type="text"
-                        fullWidth
-                        variant="standard"
-                        value={indicator}
-                        onChange={(e) => handleIndicatorChange(index, e.target.value)}
-                        InputProps={{ style: { color: 'black' } }}
-                    />
+                    <div key={index} className='flex gap-4'>
+                        <TextField
+                            margin="dense"
+                            label={`Indicator ${index + 1}`}
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                            value={indicator}
+                            onChange={(e) => handleIndicatorChange(index, e.target.value)}
+                            InputProps={{ style: { color: 'black' } }}
+                        />
+                        <TextField
+                            margin="dense"
+                            label={`Indicator Value ${index + 1}`}
+                            type="text"
+                            fullWidth
+                            variant="standard"
+                            value={selectedData.indicatorValues[index] || ''}
+                            onChange={(e) => handleIndicatorValueChange(index, e.target.value)}
+                            InputProps={{ style: { color: 'black' } }}
+                        />
+                    </div>
                 ))}
                 <div className="flex justify-end mt-2">
                     <IconButton onClick={handleAddIndicator} color="primary">
@@ -124,7 +148,7 @@ const IndicatorsDialog = ({ open, onClose, selectedData, setSelectedData }) => {
                 </Button>
             </DialogActions>
         </Dialog>
-    )
-}
+    );
+};
 
-export default IndicatorsDialog
+export default IndicatorsDialog;

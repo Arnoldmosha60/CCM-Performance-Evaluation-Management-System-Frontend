@@ -39,7 +39,6 @@ const Targets = () => {
 
             if (response.data.success) {
                 setData(response.data.data);
-                console.log(response.data.data)
             } else {
                 console.log('Error fetching objectives');
             }
@@ -74,7 +73,7 @@ const Targets = () => {
                         {data.map((objective, index) => (
                             <TableRow key={objective.id}>
                                 <TableCell>{index + 1}</TableCell>
-                                <TableCell>{objective.representative.representative}</TableCell>
+                                <TableCell>{objective.representative.fullname}</TableCell>
                                 <TableCell>#{objective.representative.wilaya_code}</TableCell>
                                 <TableCell>#{objective.objective_code}</TableCell>
                                 <TableCell>{format(new Date(objective.created_at), 'dd MMM yyyy')}</TableCell>
