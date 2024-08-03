@@ -58,7 +58,7 @@ const ViewObjectives = () => {
                                         <ListItem>
                                             <ListItemText
                                                 primary={objective.objective}
-                                                secondary={`Objective Code: ${objective.objective_code}\nCreated At: ${formatDate(objective.created_at)}`}
+                                                secondary={`Objective Code: ${objective.objective_code} |\nCreated At: ${formatDate(objective.created_at)}`}
                                             />
                                         </ListItem>
                                         {index < objectives.length - 1 && <Divider />}

@@ -60,7 +60,7 @@ const ViewIndicators = () => {
                     <ListItem>
                       <ListItemText
                         primary={indicator.indicator}
-                        secondary={`Indicator Code: ${indicator.indicator_code}\nPercentage: ${indicator.achievement_percentage}%\nCreated At: ${formatDate(indicator.created_on)}`}
+                        secondary={`Indicator Code: ${indicator.indicator_code} |\nPercentage: ${indicator.achievement_percentage}% |\nCreated At: ${formatDate(indicator.created_on)}`}
                       />
                     </ListItem>
                     {index < indicators.length - 1 && <Divider />}

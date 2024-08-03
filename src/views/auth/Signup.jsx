@@ -38,17 +38,17 @@ const Signup = () => {
                 const response = await axios.post(apis.registerUrl, postObj);
 
                 if (response.data.success) {
-                    console.log("Registration successful!");
+                    console.log(response.data.msg);
                     navigate('/auth/sign-in');
                     message.success('Registration successful');
                 } else {
-                    setErrorMessage(response.data.message || "Registration failed. Please try again.");
-                    message.error('Registration Failed');
+                    setErrorMessage(response.data.msg || "Registration failed. Please try again.");
+                    message.error(response.data.msg);
                 }
             } catch (error) {
-                setErrorMessage(error.response.data.message || "An error occurred. Please try again.");
+                setErrorMessage(error.response.data.msg || "An error occurred. Please try again.");
                 console.log(error);
-                message.error('An Error Occurred');
+                message.error(error.response.data.msg);
             }
         } else {
             setErrorMessage("Passwords didn't match!");

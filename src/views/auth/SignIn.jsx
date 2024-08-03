@@ -136,7 +136,7 @@ export default function SignIn() {
             Sign In
           </button>
         </form>
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <span className=" text-sm font-medium text-navy-700 dark:text-gray-600">
             Not registered yet?
           </span>
@@ -145,7 +145,7 @@ export default function SignIn() {
               Create an account
             </span>
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

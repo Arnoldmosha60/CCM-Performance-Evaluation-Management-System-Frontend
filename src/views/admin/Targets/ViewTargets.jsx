@@ -60,7 +60,7 @@ const ViewTargets = () => {
                     <ListItem>
                       <ListItemText
                         primary={target.target}
-                        secondary={`Target Code: ${target.target_code}\nCreated At: ${formatDate(target.created_on)}`}
+                        secondary={`Target Code: ${target.target_code} |\nCreated At: ${formatDate(target.created_on)}`}
                       />
                     </ListItem>
                     {index < targets.length - 1 && <Divider />}
