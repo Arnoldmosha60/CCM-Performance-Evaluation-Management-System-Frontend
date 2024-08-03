@@ -31,23 +31,39 @@ const TruncatedTableCell = ({ text }) => (
 const Achievements = () => {
     const token = localStorage.getItem('refresh_token');
     const [data, setData] = useState([]);
+    const [achievements, setAchievements] = useState([]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const fetchData = async () => {
+        const response = await axios.get(apis.saveIndicatorsUrl, {
+            headers: {
+                'Authorization': `Token ${token}`
+            }
+        });
+        if (response.data.success) {
+            setData(response.data.data);
+            console.log(response.data.data);
+        } else {
+            console.log('Error fetching targets');
+        }
+    };
+
+    const getCalcalculateAchievement = async () => {
+        const response = await axios.get(apis.achievementUrl, {
+            headers: {
+                'Authorization' : `Token ${token}`
+            }
+        });
+        if (response.status === 200) {
+            setAchievements(response.data)
+            console.log('Data: ', response.data)
+        }
+    }
 
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(apis.saveIndicatorsUrl, {
-                headers: {
-                    'Authorization': `Token ${token}`
-                }
-            });
-            if (response.data.success) {
-                setData(response.data.data);
-                console.log(response.data.data);
-            } else {
-                console.log('Error fetching targets');
-            }
-        };
         fetchData();
-    }, [token]);
+        getCalcalculateAchievement();
+    }, [fetchData, getCalcalculateAchievement, token]);
 
     return (
         <TableContainer component={Paper}>
