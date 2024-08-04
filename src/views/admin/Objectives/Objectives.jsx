@@ -69,7 +69,7 @@ const Objectives = () => {
               <TableCell>District</TableCell>
               <TableCell>District Code</TableCell>
               <TableCell>Region</TableCell>
-              <TableCell>Created On</TableCell>
+              <TableCell>Added On</TableCell>
               <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>

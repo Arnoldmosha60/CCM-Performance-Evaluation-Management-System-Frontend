@@ -15,6 +15,7 @@ import { apis } from 'api/apis';
 import TargetsDialog from 'components/dialog/TargetsDialog';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
+import { TruncatedTableCell } from 'variables/constants';
 
 const Targets = () => {
     const token = localStorage.getItem('refresh_token');
@@ -63,8 +64,8 @@ const Targets = () => {
                         <TableRow>
                             <TableCell>S/N</TableCell>
                             <TableCell>Representative</TableCell>
-                            <TableCell>District Code</TableCell>
                             <TableCell>Objective Code</TableCell>
+                            <TableCell>Objective</TableCell>
                             <TableCell>Created On</TableCell>
                             <TableCell>Action</TableCell>
                         </TableRow>
@@ -74,8 +75,8 @@ const Targets = () => {
                             <TableRow key={objective.id}>
                                 <TableCell>{index + 1}</TableCell>
                                 <TableCell>{objective.representative.fullname}</TableCell>
-                                <TableCell>#{objective.representative.wilaya_code}</TableCell>
                                 <TableCell>#{objective.objective_code}</TableCell>
+                                <TruncatedTableCell text={objective.objective} />
                                 <TableCell>{format(new Date(objective.created_at), 'dd MMM yyyy')}</TableCell>
                                 <TableCell>
                                     <Button

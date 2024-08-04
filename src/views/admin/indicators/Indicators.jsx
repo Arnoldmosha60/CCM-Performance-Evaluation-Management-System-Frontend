@@ -15,6 +15,7 @@ import { apis } from 'api/apis';
 import IndicatorsDialog from 'components/dialog/IndicatorsDialog';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
+import { TruncatedTableCell } from 'variables/constants';
 
 const Indicators = () => {
     const token = localStorage.getItem('refresh_token');
@@ -62,6 +63,7 @@ const Indicators = () => {
                         <TableRow>
                             <TableCell>S/N</TableCell>
                             <TableCell>Target Code</TableCell>
+                            <TableCell>Target</TableCell>
                             <TableCell>Created By</TableCell>
                             <TableCell>Created On</TableCell>
                             <TableCell>Actions</TableCell>
@@ -72,6 +74,7 @@ const Indicators = () => {
                             <TableRow key={target.id}>
                                 <TableCell>{index + 1}</TableCell>
                                 <TableCell>#{target.target_code}</TableCell>
+                                <TruncatedTableCell text={target.target} />
                                 <TableCell>{target.created_by.fullname}</TableCell>
                                 <TableCell>{format(new Date(target.created_on), 'dd MMM yyyy')}</TableCell>
                                 <TableCell>

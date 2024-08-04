@@ -15,6 +15,7 @@ import { apis } from 'api/apis';
 import ActivitiesDialog from 'components/dialog/ActivitiesDialog';
 import { useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
+import { TruncatedTableCell } from 'variables/constants';
 
 const Activities = () => {
     const token = localStorage.getItem('refresh_token');
@@ -63,6 +64,7 @@ const Activities = () => {
                         <TableRow>
                             <TableCell>S/N</TableCell>
                             <TableCell>Indicator Code</TableCell>
+                            <TableCell>Indicator</TableCell>
                             <TableCell>Created By</TableCell>
                             <TableCell>Created On</TableCell>
                             <TableCell>Actions</TableCell>
@@ -73,6 +75,7 @@ const Activities = () => {
                             <TableRow key={indicator.id}>
                                 <TableCell>{index + 1}</TableCell>
                                 <TableCell>#{indicator.indicator_code}</TableCell>
+                                <TruncatedTableCell text={indicator.indicator} />
                                 <TableCell>{indicator.created_by.fullname}</TableCell>
                                 <TableCell>{format(new Date(indicator.created_on), 'dd MMM yyyy')}</TableCell>
                                 <TableCell>

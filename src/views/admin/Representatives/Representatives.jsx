@@ -123,7 +123,7 @@ const Representatives = () => {
                         <thead>
                             <tr>
                                 <th className="py-2 px-4 border-b">S/N</th>
-                                <th className="py-2 px-4 border-b">Wilaya</th>
+                                <th className="py-2 px-4 border-b">Jimbo</th>
                                 <th className="py-2 px-4 border-b">Representative</th>
                                 <th className="py-2 px-4 border-b">Actions</th>
                             </tr>

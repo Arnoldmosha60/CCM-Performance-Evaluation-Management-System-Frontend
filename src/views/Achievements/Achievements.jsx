@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { apis } from 'api/apis';
@@ -9,24 +11,9 @@ import {
     TableHead,
     TableRow,
     Paper,
-    Tooltip,
 } from '@mui/material';
 import { format } from 'date-fns';
-
-const TruncatedTableCell = ({ text }) => (
-  <Tooltip title={text}>
-    <TableCell
-      sx={{
-        maxWidth: '150px', // Adjust this value as needed
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-      }}
-    >
-      {text}
-    </TableCell>
-  </Tooltip>
-);
+import { TruncatedTableCell } from 'variables/constants';
 
 const Achievements = () => {
     const token = localStorage.getItem('refresh_token');
@@ -42,28 +29,29 @@ const Achievements = () => {
         });
         if (response.data.success) {
             setData(response.data.data);
-            console.log(response.data.data);
+            // console.log(response.data.data);
         } else {
             console.log('Error fetching targets');
         }
     };
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const getCalcalculateAchievement = async () => {
         const response = await axios.get(apis.achievementUrl, {
             headers: {
                 'Authorization' : `Token ${token}`
             }
         });
-        if (response.status === 200) {
-            setAchievements(response.data)
-            console.log('Data: ', response.data)
+        if (response.data.success) {
+            setAchievements(response.data);
         }
+        console.log('An error occurred');
     }
 
     useEffect(() => {
         fetchData();
         getCalcalculateAchievement();
-    }, [fetchData, getCalcalculateAchievement, token]);
+    }, []);
 
     return (
         <TableContainer component={Paper}>
