@@ -14,4 +14,5 @@ export const apis = {
     saveActivitiesUrl: baseURL + 'api/ccm/save-activities/',
     getIndicatorActivitiesUrl: baseURL + 'api/ccm/indicator-activities',
     achievementUrl: baseURL + 'api/ccm/calculate-achievement-value/',
+    generateReportUrl: baseURL + 'api/ccm/generate-report',
 }

@@ -16,6 +16,7 @@ import {
   MdOutlinePeople,
   MdOutlineAssignment,
   MdOutlineEmojiEvents,
+  MdOutlineReport,
 } from "react-icons/md";
 import Signup from "views/auth/Signup";
 import Objectives from "views/admin/Objectives/Objectives";
@@ -29,6 +30,7 @@ import Indicators from "views/admin/Indicators/Indicators";
 import Activities from "views/admin/activities/Activities";
 import ViewActivities from "views/admin/activities/ViewActivities";
 import Achievements from "views/Achievements/Achievements";
+import Reports from "views/admin/Reports";
 
 const routes = [
   {
@@ -114,6 +116,13 @@ const routes = [
     icon: <MdOutlineGpsFixed className="h-6 w-6" />,
     path: 'regions',
     component: <Regions />,
+  },
+  {
+    name: "Reports",
+    layout: "/admin",
+    icon: <MdOutlineReport className="h-6 w-6" />,
+    path: 'reports',
+    component: <Reports />
   },
   {
     name: "Sign In",

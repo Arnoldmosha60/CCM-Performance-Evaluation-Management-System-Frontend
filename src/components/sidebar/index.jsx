@@ -31,10 +31,10 @@ const Sidebar = ({ open, onClose }) => {
       </span>
 
       <div className="mx-[35px] mt-[40px] flex items-center">
-        <img src={logo} alt="Logo" className="h-20 w-20 mr-2" />
-        <div className="p-2 shadow-lg rounded bg-white dark:bg-navy-700 dark:text-white">
+        <img src={logo} alt="Logo" className="h-20 w-20 mr-1" />
+        <div className="p-1 shadow-lg rounded bg-white dark:bg-navy-700 dark:text-white">
           <div className="font-poppins text-[26px] font-bold uppercase text-navy-700 dark:text-white">
-            CCM - <span className="font-medium">PMS</span>
+            CCM - <span className="font-medium">PEMS</span>
           </div>
         </div>
       </div>
