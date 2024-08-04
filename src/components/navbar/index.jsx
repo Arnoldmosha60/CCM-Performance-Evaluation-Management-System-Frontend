@@ -3,13 +3,13 @@ import Dropdown from "components/dropdown";
 import { FiAlignJustify } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
-import { RiMoonFill, RiSunFill } from "react-icons/ri";
+// import { RiMoonFill, RiSunFill } from "react-icons/ri";
 import avatar from "assets/img/avatars/avatar4.png";
 import {message} from 'antd';
 
 const Navbar = (props) => {
   const { onOpenSidenav, brandText } = props;
-  const [darkmode, setDarkmode] = useState(false);
+  // const [darkmode, setDarkmode] = useState(false);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
@@ -74,8 +74,7 @@ const Navbar = (props) => {
           <FiAlignJustify className="h-5 w-5" />
         </span>
         
-        
-        <div
+        {/* <div
           className="cursor-pointer text-gray-600"
           onClick={() => {
             if (darkmode) {
@@ -92,7 +91,8 @@ const Navbar = (props) => {
           ) : (
             <RiMoonFill className="h-4 w-4 text-gray-600 dark:text-white" />
           )}
-        </div>
+        </div> */}
+
         {/* Profile & Dropdown */}
         <Dropdown
           button={
