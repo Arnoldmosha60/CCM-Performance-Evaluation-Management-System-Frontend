@@ -5,8 +5,9 @@ import React, { useEffect, useState } from 'react';
 import { MdEdit, MdSearch } from 'react-icons/md';
 import { message } from 'antd';
 import { apis } from 'api/apis';
+import { TruncateTableCell } from 'variables/constants';
 
-const Representatives = () => {
+const Representatives = ({ representative }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [data, setData] = useState([]);
     const [editingWilaya, setEditingWilaya] = useState(null); // State to track the wilaya being edited
@@ -155,7 +156,16 @@ const Representatives = () => {
                                         <td className="py-2 px-4 border-b">{item.wilaya}</td>
                                         <td className="py-2 px-4 border-b">{item.mkoa}</td>
                                         <td className="py-2 px-4 border-b">
-                                            {representative ? representative.user.fullname : ''}
+                                            <TruncateTableCell
+                                                text={representative ? representative.user.fullname : ''}
+                                                userInfo={representative ? {
+                                                    email: representative.user.email,
+                                                    phone: representative.user.contact,
+                                                    ccm_number: representative.user.ccm_number,
+                                                    date_joined: representative.user.created_at
+                                                    // Add other info you want to display
+                                                } : {}}
+                                            />
                                         </td>
                                         <td className="py-2 px-4 border-b text-center">
                                             {editingWilaya === item ? (
