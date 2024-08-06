@@ -3,11 +3,20 @@ import { baseURL } from 'api/baseUrl';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { MdEdit, MdSearch } from 'react-icons/md';
-import { message } from 'antd';
+import { message, Tooltip } from 'antd';
 import { apis } from 'api/apis';
-import { TruncateTableCell } from 'variables/constants';
+import moment from 'moment';
 
-const Representatives = ({ representative }) => {
+const UserTooltip = ({ userInfo }) => (
+    <div>
+        <p><strong>Email:</strong> {userInfo.email}</p>
+        <p><strong>Phone:</strong> {userInfo.contact}</p>
+        <p><strong>CCM Number:</strong> {userInfo.ccm_number}</p>
+        <p><strong>Date Joined:</strong> {moment(userInfo.date_joined).format('MMMM Do YYYY, h:mm:ss a')}</p>
+    </div>
+);
+
+const Representatives = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [data, setData] = useState([]);
     const [editingWilaya, setEditingWilaya] = useState(null); // State to track the wilaya being edited
@@ -150,22 +159,23 @@ const Representatives = ({ representative }) => {
                         <tbody className="text-center">
                             {filteredData.map((item, index) => {
                                 const representative = representatives.find(rep => rep.wilaya === item.wilaya);
+                                const userInfo = representative ? {
+                                    email: representative.user.email,
+                                    contact: representative.user.contact,
+                                    ccm_number: representative.user.ccm_number,
+                                    date_joined: representative.user.created_at
+                                } : {};
                                 return (
                                     <tr key={index} className="hover:bg-gray-100">
                                         <td className="py-2 px-4 border-b">{index + 1}</td>
                                         <td className="py-2 px-4 border-b">{item.wilaya}</td>
                                         <td className="py-2 px-4 border-b">{item.mkoa}</td>
                                         <td className="py-2 px-4 border-b">
-                                            <TruncateTableCell
-                                                text={representative ? representative.user.fullname : ''}
-                                                userInfo={representative ? {
-                                                    email: representative.user.email,
-                                                    phone: representative.user.contact,
-                                                    ccm_number: representative.user.ccm_number,
-                                                    date_joined: representative.user.created_at
-                                                    // Add other info you want to display
-                                                } : {}}
-                                            />
+                                            {representative ? (
+                                                <Tooltip title={<UserTooltip userInfo={userInfo} />} placement="top">
+                                                    <span>{representative.user.fullname}</span>
+                                                </Tooltip>
+                                            ) : ''}
                                         </td>
                                         <td className="py-2 px-4 border-b text-center">
                                             {editingWilaya === item ? (

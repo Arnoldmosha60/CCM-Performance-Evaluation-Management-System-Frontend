@@ -87,7 +87,6 @@ const ActivitiesDialog = ({ open, onClose, selectedData, setSelectedData }) => {
         <DialogContentText style={{ color: 'black' }}>
           Please enter the activity and its corresponding value for Indicator #{selectedData.indicator_code || ''}.
         </DialogContentText>
-
         <TextField
           margin="dense"
           label="Indicator Code"
@@ -99,16 +98,29 @@ const ActivitiesDialog = ({ open, onClose, selectedData, setSelectedData }) => {
           InputProps={{ style: { color: 'black' } }}
         />
 
-        <TextField
-          margin="dense"
-          label="Indicator"
-          type="text"
-          fullWidth
-          variant="standard"
-          value={selectedData.indicator || ''}
-          disabled
-          InputProps={{ style: { color: 'black' } }}
-        />
+        <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+          <TextField
+            margin="dense"
+            label="Indicator"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={selectedData.indicator || ''}
+            disabled
+            InputProps={{ style: { color: 'black' } }}
+          />
+
+          <TextField
+            margin="dense"
+            label="Indicator value"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={selectedData.indicator_value || ''}
+            disabled
+            InputProps={{ style: { color: 'black' } }}
+          />
+        </div>
 
         {(selectedData.activities || []).map((activityData, index) => (
           <div key={index} style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>

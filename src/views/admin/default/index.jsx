@@ -78,10 +78,10 @@ const Dashboard = () => {
 
       {/* Charts */}
 
-      <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
+      {/* <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
         <TotalSpent />
         <WeeklyRevenue />
-      </div>
+      </div> */}
 
       {/* Tables & Charts */}
 
@@ -90,7 +90,7 @@ const Dashboard = () => {
         {/* Traffic chart & Calender */}
 
 
-        <DailyTraffic />
+        {/* <DailyTraffic /> */}
         <div className="grid grid-cols-1 rounded-[20px]">
           <MiniCalendar />
         </div>
